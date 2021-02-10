@@ -301,7 +301,7 @@ function ragebotLogs()
     ragebot_target_safepoint = Event.GetInt("safepoint");
     ragebot_target_exploit = Event.GetInt("exploit");
     targetName = Entity.GetName(ragebot_target);
-    
+    йй
     var log_tab = "\x01[ \x02Revoltmod \x01] TARGET: " + targetName + " HITBOX: " + getHitboxName(ragebot_target_hitbox) + " HC: " + ragebot_target_hitchance + " SAFEPOINT: " + ragebot_target_safepoint + " EXPLOIT: " + ragebot_target_exploit + " \n"
     Cheat.Print(log_tab)
     if (UI.GetValue("Misc", "JAVASCRIPT", "Script Items", "Chat RageLogs", true)) {
@@ -958,24 +958,24 @@ function aspectration() {
 }
 
 function main() {
-	UI.AddColorPicker("Watermark Color");
-	UI.AddLabel("");
-	UI.AddSliderInt("Tickbase X", 0, Global.GetScreenSize()[0]);
+    UI.AddColorPicker("Watermark Color");
+    UI.AddLabel("");
+    UI.AddSliderInt("Tickbase X", 0, Global.GetScreenSize()[0]);
     UI.AddSliderInt("Tickbase Y", 0, Global.GetScreenSize()[1]);
-	UI.AddLabel("");
-	UI.AddSliderInt("Antiaim X", 0, Global.GetScreenSize()[0]);
+    UI.AddLabel("");
+    UI.AddSliderInt("Antiaim X", 0, Global.GetScreenSize()[0]);
     UI.AddSliderInt("Antiaim Y", 0, Global.GetScreenSize()[1]);
     UI.AddColorPicker("Fake Color");
-	UI.AddLabel("");
+    UI.AddLabel("");
     UI.AddSliderInt("Keybinds X", 0, Global.GetScreenSize()[0]);
     UI.AddSliderInt("Keybinds Y", 0, Global.GetScreenSize()[1]);
-	UI.AddColorPicker("Hotkey Color");
-	UI.AddLabel("");
+    UI.AddColorPicker("Hotkey Color");
+    UI.AddLabel("");
     UI.AddCheckbox( "Safe AWP" );
     UI.AddSliderFloat("Aspect Ratio", 0, 5);
     UI.AddCheckbox("DT Recharger");
-    UI.AddCheckbox("Chat RageLogs")
-	UI.AddLabel("");
+    UI.AddCheckbox("Chat RageLogs");
+    UI.AddLabel("");
     UI.AddDropdown( "Arrows", [ "Off", "triangle", "arrows" ] );
     UI.AddColorPicker( "Arrows color" );
     UI.AddColorPicker( "Selected arrow color" );
@@ -983,9 +983,9 @@ function main() {
     UI.AddHotkey( "Right Hotkey" );
     UI.AddHotkey( "Backwards Hotkey" );
     UI.AddHotkey( "Forward Hotkey" );
-	UI.AddLabel("");
+    UI.AddLabel("");
     UI.AddHotkey("Minimum damage override");
-	UI.AddSliderInt("Pistol Mindmg", 0, 130);
+    UI.AddSliderInt("Pistol Mindmg", 0, 130);
     UI.AddSliderInt("Heavy Pistol Mindmg", 0, 130);
     UI.AddSliderInt("Scout Mindmg", 0, 130);
     UI.AddSliderInt("AWP Mindmg", 0, 130);
