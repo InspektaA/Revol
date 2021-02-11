@@ -953,6 +953,13 @@ function dt_recharger() {
 	}
 }
 
+function dt_enc() {
+    dt_shift = UI.GetValue("Misc", "JAVASCRIPT", "Script Items", "DT Shift");
+    dt_tol = UI.GetValue("Misc", "JAVASCRIPT", "Script Items", "DT Tolerance");
+    Exploit.OverrideShift(dt_shift);
+    Exploit.OverrideTolerance(dt_tol);
+}
+
 function aspectration() {
     if (UI.GetValue("Misc", "JAVASCRIPT", "Script items", "Aspect Ratio", true) && UI.GetValue("Misc", "JAVASCRIPT", "Script items", "Activate Revoltmod", true)) {
         UI.SetEnabled("Misc", "JAVASCRIPT", "Script items", "Aspect Ratio Value", true);
@@ -1021,6 +1028,8 @@ function togler() {
         UI.SetEnabled("Misc", "JAVASCRIPT", "Script items", "Keybinds Y", true);
         UI.SetEnabled("Misc", "JAVASCRIPT", "Script items", "Hotkey Color", true);
         UI.SetEnabled("Misc", "JAVASCRIPT", "Script items", "Legit AA on key", true ); 
+        UI.SetEnabled("Misc", "JAVASCRIPT", "Script items", "DT Shift", true);
+        UI.SetEnabled("Misc", "JAVASCRIPT", "Script items", "DT Tolerance", true);
         UI.SetEnabled("Misc", "JAVASCRIPT", "Script items", "Safe AWP", true );
         UI.SetEnabled("Misc", "JAVASCRIPT", "Script items", "Aspect Ratio", true );
         UI.SetEnabled("Misc", "JAVASCRIPT", "Script items", "DT Recharger", true); 
@@ -1050,6 +1059,8 @@ function togler() {
         UI.SetEnabled("Misc", "JAVASCRIPT", "Script items", "Hotkey Color", false);
         UI.SetEnabled("Misc", "JAVASCRIPT", "Script items", "Legit AA on key", false ); 
         UI.SetEnabled("Misc", "JAVASCRIPT", "Script items", "Legit AA bind", false ); 
+        UI.SetEnabled("Misc", "JAVASCRIPT", "Script items", "DT Shift", false);
+        UI.SetEnabled("Misc", "JAVASCRIPT", "Script items", "DT Tolerance", false);
         UI.SetEnabled("Misc", "JAVASCRIPT", "Script items", "Safe AWP", false );
         UI.SetEnabled("Misc", "JAVASCRIPT", "Script items", "Aspect Ratio", false );
         UI.SetEnabled("Misc", "JAVASCRIPT", "Script items", "Aspect Ratio Value", false);
@@ -1083,6 +1094,8 @@ function modmenu() {
     UI.AddColorPicker("Hotkey Color");
     UI.AddCheckbox("Legit AA on key");
     UI.AddHotkey("Legit AA bind");
+    UI.AddSliderInt("DT Shift", 0, 14);
+    UI.AddSliderInt("DT Tolerance", 0, 8);
     UI.AddCheckbox("Safe AWP");
     UI.AddCheckbox( "Aspect Ratio");
     UI.AddSliderFloat("Aspect Ratio Value", 0, 5);
@@ -1107,7 +1120,8 @@ function modmenu() {
     UI.SetValue("ChatRagelogs", false);
 }
 
-Cheat.RegisterCallback("CreateMove", "legit_antiaim");
+Cheat.RegisterCallback("CreateMove", "dt_enc");
+Cheat.RegisterCallback("FrameStageNotify", "legit_antiaim");
 Cheat.RegisterCallback("Draw", "togler");
 Cheat.RegisterCallback("FrameStageNotify", "aspectration");
 Cheat.RegisterCallback("Draw", "main_dt");
