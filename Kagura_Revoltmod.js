@@ -1121,7 +1121,7 @@ function modmenu() {
 }
 
 Cheat.RegisterCallback("CreateMove", "dt_enc");
-Cheat.RegisterCallback("FrameStageNotify", "legit_antiaim");
+Cheat.RegisterCallback("CreateMove", "legit_antiaim");
 Cheat.RegisterCallback("Draw", "togler");
 Cheat.RegisterCallback("FrameStageNotify", "aspectration");
 Cheat.RegisterCallback("Draw", "main_dt");
