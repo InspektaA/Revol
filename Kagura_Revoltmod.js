@@ -969,68 +969,65 @@ function aspectration() {
 }
 
 function enable_mod() {
-    UI.AddLabel("-------------");
     UI.AddCheckbox("Activate Revoltmod")
-    UI.AddLabel("-------------");
 }
 
 function togler() {
     if (UI.GetValue("Misc", "JAVASCRIPT", "Script items", "Activate Revoltmod", true)) {    
-        UI.SetEnabled("Watermark Color", true);
-        UI.SetEnabled("Tickbase X", true);
-        UI.SetEnabled("Tickbase Y", true);
-        UI.SetEnabled("Antiaim X", true);
-        UI.SetEnabled("Antiaim Y", true);
-        UI.SetEnabled("Fake Color", true);
-        UI.SetEnabled("Keybinds X", true);
-        UI.SetEnabled("Keybinds Y", true);
-        UI.SetEnabled("Hotkey Color", true);
-        UI.SetEnabled("Safe AWP", true );
-        UI.SetEnabled("Aspect Ratio", true );
-        UI.SetEnabled("DT Recharger", true); 
-        UI.SetEnabled("Chat RageLogs", true)
-        UI.SetEnabled( "Arrows", true);
-        UI.SetEnabled( "Arrows color", true );
-        UI.SetEnabled( "Selected arrow color", true );
-        UI.SetEnabled( "Left Hotkey", true );
-        UI.SetEnabled( "Right Hotkey", true );
-        UI.SetEnabled( "Backwards Hotkey", true );
-        UI.SetEnabled( "Forward Hotkey", true );
-        UI.SetEnabled("Minimum damage override", true);
-        UI.SetEnabled("Pistol Mindmg", true);
-        UI.SetEnabled("Heavy Pistol Mindmg", true);
-        UI.SetEnabled("Scout Mindmg", true);
-        UI.SetEnabled("AWP Mindmg", true);
-        UI.SetEnabled("Auto Mindmg", true);
+        UI.SetEnabled("Misc", "JAVASCRIPT", "Script items", "Watermark Color", true);
+        UI.SetEnabled("Misc", "JAVASCRIPT", "Script items", "Tickbase X", true);
+        UI.SetEnabled("Misc", "JAVASCRIPT", "Script items", "Tickbase Y", true);
+        UI.SetEnabled("Misc", "JAVASCRIPT", "Script items", "Antiaim X", true);
+        UI.SetEnabled("Misc", "JAVASCRIPT", "Script items", "Antiaim Y", true);
+        UI.SetEnabled("Misc", "JAVASCRIPT", "Script items", "Fake Color", true);
+        UI.SetEnabled("Misc", "JAVASCRIPT", "Script items", "Keybinds X", true);
+        UI.SetEnabled("Misc", "JAVASCRIPT", "Script items", "Keybinds Y", true);
+        UI.SetEnabled("Misc", "JAVASCRIPT", "Script items", "Hotkey Color", true);
+        UI.SetEnabled("Misc", "JAVASCRIPT", "Script items", "Safe AWP", true );
+        UI.SetEnabled("Misc", "JAVASCRIPT", "Script items", "Aspect Ratio", true );
+        UI.SetEnabled("Misc", "JAVASCRIPT", "Script items", "DT Recharger", true); 
+        UI.SetEnabled("Misc", "JAVASCRIPT", "Script items", "Chat RageLogs", true)
+        UI.SetEnabled("Misc", "JAVASCRIPT", "Script items", "Arrows", true);
+        UI.SetEnabled("Misc", "JAVASCRIPT", "Script items", "Arrows color", true );
+        UI.SetEnabled("Misc", "JAVASCRIPT", "Script items", "Selected arrow color", true );
+        UI.SetEnabled("Misc", "JAVASCRIPT", "Script items", "Left Hotkey", true );
+        UI.SetEnabled("Misc", "JAVASCRIPT", "Script items", "Right Hotkey", true );
+        UI.SetEnabled("Misc", "JAVASCRIPT", "Script items", "Backwards Hotkey", true );
+        UI.SetEnabled("Misc", "JAVASCRIPT", "Script items", "Forward Hotkey", true );
+        UI.SetEnabled("Misc", "JAVASCRIPT", "Script items", "Minimum damage override", true);
+        UI.SetEnabled("Misc", "JAVASCRIPT", "Script items", "Pistol Mindmg", true);
+        UI.SetEnabled("Misc", "JAVASCRIPT", "Script items", "Heavy Pistol Mindmg", true);
+        UI.SetEnabled("Misc", "JAVASCRIPT", "Script items", "Scout Mindmg", true);
+        UI.SetEnabled("Misc", "JAVASCRIPT", "Script items", "AWP Mindmg", true);
+        UI.SetEnabled("Misc", "JAVASCRIPT", "Script items", "Auto Mindmg", true);
     } else {
-        UI.SetEnabled("Watermark Color", false);
-        UI.SetEnabled("Tickbase X", false);
-        UI.SetEnabled("Tickbase Y", false);
-        UI.SetEnabled("Antiaim X", false);
-        UI.SetEnabled("Antiaim Y", false);
-        UI.SetEnabled("Fake Color", false);
-        UI.SetEnabled("Keybinds X", false);
-        UI.SetEnabled("Keybinds Y", false);
-        UI.SetEnabled("Hotkey Color", false);
-        UI.SetEnabled("Safe AWP", false );
-        UI.SetEnabled("Aspect Ratio", false );
-        UI.SetEnabled("Aspect Ratio Value", false)
-        UI.SetEnabled("DT Recharger", false); 
-        UI.SetEnabled("Chat RageLogs", false)
-        UI.SetEnabled("Arrows", false );
-        UI.SetEnabled("Arrows color", false );
-        UI.SetEnabled("Selected arrow color", false );
-        UI.SetEnabled("Left Hotkey", false );
-        UI.SetEnabled("Right Hotkey", false );
-        UI.SetEnabled("Backwards Hotkey", false );
-        UI.SetEnabled("Forward Hotkey", false );
-        UI.SetEnabled("Minimum damage override", false);
-        UI.SetEnabled("Pistol Mindmg", false);
-        UI.SetEnabled("Heavy Pistol Mindmg", false);
-        UI.SetEnabled("Scout Mindmg", false);
-        UI.SetEnabled("AWP Mindmg", false);
-        UI.SetEnabled("Auto Mindmg", false);
-        UI.SetEnabled("-------------", false)
+        UI.SetEnabled("Misc", "JAVASCRIPT", "Script items", "Watermark Color", false);
+        UI.SetEnabled("Misc", "JAVASCRIPT", "Script items", "Tickbase X", false);
+        UI.SetEnabled("Misc", "JAVASCRIPT", "Script items", "Tickbase Y", false);
+        UI.SetEnabled("Misc", "JAVASCRIPT", "Script items", "Antiaim X", false);
+        UI.SetEnabled("Misc", "JAVASCRIPT", "Script items", "Antiaim Y", false);
+        UI.SetEnabled("Misc", "JAVASCRIPT", "Script items", "Fake Color", false);
+        UI.SetEnabled("Misc", "JAVASCRIPT", "Script items", "Keybinds X", false);
+        UI.SetEnabled("Misc", "JAVASCRIPT", "Script items", "Keybinds Y", false);
+        UI.SetEnabled("Misc", "JAVASCRIPT", "Script items", "Hotkey Color", false);
+        UI.SetEnabled("Misc", "JAVASCRIPT", "Script items", "Safe AWP", false );
+        UI.SetEnabled("Misc", "JAVASCRIPT", "Script items", "Aspect Ratio", false );
+        UI.SetEnabled("Misc", "JAVASCRIPT", "Script items", "Aspect Ratio Value", false);
+        UI.SetEnabled("Misc", "JAVASCRIPT", "Script items", "DT Recharger", false); 
+        UI.SetEnabled("Misc", "JAVASCRIPT", "Script items", "Chat RageLogs", false);
+        UI.SetEnabled("Misc", "JAVASCRIPT", "Script items", "Arrows", false );
+        UI.SetEnabled("Misc", "JAVASCRIPT", "Script items", "Arrows color", false );
+        UI.SetEnabled("Misc", "JAVASCRIPT", "Script items", "Selected arrow color", false );
+        UI.SetEnabled("Misc", "JAVASCRIPT", "Script items", "Left Hotkey", false );
+        UI.SetEnabled("Misc", "JAVASCRIPT", "Script items", "Right Hotkey", false );
+        UI.SetEnabled("Misc", "JAVASCRIPT", "Script items", "Backwards Hotkey", false );
+        UI.SetEnabled("Misc", "JAVASCRIPT", "Script items", "Forward Hotkey", false );
+        UI.SetEnabled("Misc", "JAVASCRIPT", "Script items", "Minimum damage override", false);
+        UI.SetEnabled("Misc", "JAVASCRIPT", "Script items", "Pistol Mindmg", false);
+        UI.SetEnabled("Misc", "JAVASCRIPT", "Script items", "Heavy Pistol Mindmg", false);
+        UI.SetEnabled("Misc", "JAVASCRIPT", "Script items", "Scout Mindmg", false);
+        UI.SetEnabled("Misc", "JAVASCRIPT", "Script items", "AWP Mindmg", false);
+        UI.SetEnabled("Misc", "JAVASCRIPT", "Script items", "Auto Mindmg", false);
     }
 }
 
@@ -1063,12 +1060,12 @@ function modmenu() {
     UI.AddSliderInt("AWP Mindmg", 0, 130);
     UI.AddSliderInt("Auto Mindmg", 0, 130);
     UI.SetValue("Safe AWP", false);
-    UI.SetValue("Aspect Ratio", false)
-    UI.SetValue("DT Recharger", false)
-    UI.SetValue("ChatRagelogs", false)
+    UI.SetValue("Aspect Ratio", false);
+    UI.SetValue("DT Recharger", false);
+    UI.SetValue("ChatRagelogs", false);
 }
 
-Cheat.RegisterCallback("CreateMove", "togler");
+Cheat.RegisterCallback("Draw", "togler");
 Cheat.RegisterCallback("FrameStageNotify", "aspectration");
 Cheat.RegisterCallback("Draw", "main_dt");
 Cheat.RegisterCallback("Draw", "keybinds");
@@ -1079,3 +1076,4 @@ Cheat.RegisterCallback("Draw", "drawString");
 Cheat.RegisterCallback("CreateMove", "onCreateMove");
 Cheat.RegisterCallback("player_connect_full", "player_connect");
 Cheat.RegisterCallback("CreateMove", "dt_recharger");
+
