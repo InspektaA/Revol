@@ -26,7 +26,7 @@ var lastPressed = 0
 var isHideRealActive = false
 var fa = 0;
 var sa = 0;
-var DT_Charge 
+var DT_Charge;
 
 function get_icon(a) {
     var letter = ""
