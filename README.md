@@ -1,5 +1,5 @@
 # revoltmod
-Revoltmod for Onetap v3 (Crack)
+Revoltmod for Onetap v3 (Crack).  
 This is my first javascript.
 # Changelog
 **11.02.2021** 
