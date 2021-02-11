@@ -1,5 +1,6 @@
 
-main();
+enable_mod();
+modmenu();
 
 var color_h = UI.GetColor("Misc", "JAVASCRIPT", "Script Items", "Hotkey Color");
 var color_f = UI.GetColor("Misc", "JAVASCRIPT", "Script items", "Fake Color");
@@ -25,7 +26,7 @@ var lastPressed = 0
 var isHideRealActive = false
 var fa = 0;
 var sa = 0;
-var DT_Charge;
+var DT_Charge 
 
 function get_icon(a) {
     var letter = ""
@@ -301,7 +302,7 @@ function ragebotLogs()
     ragebot_target_safepoint = Event.GetInt("safepoint");
     ragebot_target_exploit = Event.GetInt("exploit");
     targetName = Entity.GetName(ragebot_target);
-    йй
+    
     var log_tab = "\x01[ \x02Revoltmod \x01] TARGET: " + targetName + " HITBOX: " + getHitboxName(ragebot_target_hitbox) + " HC: " + ragebot_target_hitchance + " SAFEPOINT: " + ragebot_target_safepoint + " EXPLOIT: " + ragebot_target_exploit + " \n"
     Cheat.Print(log_tab)
     if (UI.GetValue("Misc", "JAVASCRIPT", "Script Items", "Chat RageLogs", true)) {
@@ -951,49 +952,125 @@ function dt_recharger() {
 }
 
 function aspectration() {
-    UI.SetValue("Misc", "GENERAL", "Miscellaneous", "Hidden cvars", true);
-    var ratio_value = UI.GetValue("Misc", "JAVASCRIPT", "Script Items", "Aspect Ratio")
-    var aspectratio = "r_aspectratio " + ratio_value
-    Cheat.ExecuteCommand(aspectratio)
+    if (UI.GetValue("Misc", "JAVASCRIPT", "Script items", "Aspect Ratio", true) && UI.GetValue("Misc", "JAVASCRIPT", "Script items", "Activate Revoltmod", true)) {
+        UI.SetEnabled("Misc", "JAVASCRIPT", "Script items", "Aspect Ratio Value", true);
+        ratio = UI.GetValue("Misc", "JAVASCRIPT", "Script items", "Aspect Ratio Value").toString();
+        UI.SetValue("Misc", "GENERAL", "Miscellaneous", "Hidden cvars", true);
+        switch (Global.FrameStage()) {
+            case 5: {
+                Global.ExecuteCommand( "r_aspectratio " + ratio );
+                break;
+            }
+            default: break;
+        } 
+    } else {
+        UI.SetEnabled("Misc", "JAVASCRIPT", "Script items", "Aspect Ratio Value", false)
+    }
 }
 
-function main() {
+function enable_mod() {
+    UI.AddLabel("-------------");
+    UI.AddCheckbox("Activate Revoltmod")
+    UI.AddLabel("-------------");
+}
+
+function togler() {
+    if (UI.GetValue("Misc", "JAVASCRIPT", "Script items", "Activate Revoltmod", true)) {    
+        UI.SetEnabled("Watermark Color", true);
+        UI.SetEnabled("Tickbase X", true);
+        UI.SetEnabled("Tickbase Y", true);
+        UI.SetEnabled("Antiaim X", true);
+        UI.SetEnabled("Antiaim Y", true);
+        UI.SetEnabled("Fake Color", true);
+        UI.SetEnabled("Keybinds X", true);
+        UI.SetEnabled("Keybinds Y", true);
+        UI.SetEnabled("Hotkey Color", true);
+        UI.SetEnabled("Safe AWP", true );
+        UI.SetEnabled("Aspect Ratio", true );
+        UI.SetEnabled("DT Recharger", true); 
+        UI.SetEnabled("Chat RageLogs", true)
+        UI.SetEnabled( "Arrows", true);
+        UI.SetEnabled( "Arrows color", true );
+        UI.SetEnabled( "Selected arrow color", true );
+        UI.SetEnabled( "Left Hotkey", true );
+        UI.SetEnabled( "Right Hotkey", true );
+        UI.SetEnabled( "Backwards Hotkey", true );
+        UI.SetEnabled( "Forward Hotkey", true );
+        UI.SetEnabled("Minimum damage override", true);
+        UI.SetEnabled("Pistol Mindmg", true);
+        UI.SetEnabled("Heavy Pistol Mindmg", true);
+        UI.SetEnabled("Scout Mindmg", true);
+        UI.SetEnabled("AWP Mindmg", true);
+        UI.SetEnabled("Auto Mindmg", true);
+    } else {
+        UI.SetEnabled("Watermark Color", false);
+        UI.SetEnabled("Tickbase X", false);
+        UI.SetEnabled("Tickbase Y", false);
+        UI.SetEnabled("Antiaim X", false);
+        UI.SetEnabled("Antiaim Y", false);
+        UI.SetEnabled("Fake Color", false);
+        UI.SetEnabled("Keybinds X", false);
+        UI.SetEnabled("Keybinds Y", false);
+        UI.SetEnabled("Hotkey Color", false);
+        UI.SetEnabled("Safe AWP", false );
+        UI.SetEnabled("Aspect Ratio", false );
+        UI.SetEnabled("Aspect Ratio Value", false)
+        UI.SetEnabled("DT Recharger", false); 
+        UI.SetEnabled("Chat RageLogs", false)
+        UI.SetEnabled("Arrows", false );
+        UI.SetEnabled("Arrows color", false );
+        UI.SetEnabled("Selected arrow color", false );
+        UI.SetEnabled("Left Hotkey", false );
+        UI.SetEnabled("Right Hotkey", false );
+        UI.SetEnabled("Backwards Hotkey", false );
+        UI.SetEnabled("Forward Hotkey", false );
+        UI.SetEnabled("Minimum damage override", false);
+        UI.SetEnabled("Pistol Mindmg", false);
+        UI.SetEnabled("Heavy Pistol Mindmg", false);
+        UI.SetEnabled("Scout Mindmg", false);
+        UI.SetEnabled("AWP Mindmg", false);
+        UI.SetEnabled("Auto Mindmg", false);
+        UI.SetEnabled("-------------", false)
+    }
+}
+
+function modmenu() {
     UI.AddColorPicker("Watermark Color");
-    UI.AddLabel("");
     UI.AddSliderInt("Tickbase X", 0, Global.GetScreenSize()[0]);
     UI.AddSliderInt("Tickbase Y", 0, Global.GetScreenSize()[1]);
-    UI.AddLabel("");
     UI.AddSliderInt("Antiaim X", 0, Global.GetScreenSize()[0]);
     UI.AddSliderInt("Antiaim Y", 0, Global.GetScreenSize()[1]);
     UI.AddColorPicker("Fake Color");
-    UI.AddLabel("");
     UI.AddSliderInt("Keybinds X", 0, Global.GetScreenSize()[0]);
     UI.AddSliderInt("Keybinds Y", 0, Global.GetScreenSize()[1]);
     UI.AddColorPicker("Hotkey Color");
-    UI.AddLabel("");
-    UI.AddCheckbox( "Safe AWP" );
-    UI.AddSliderFloat("Aspect Ratio", 0, 5);
-    UI.AddCheckbox("DT Recharger");
-    UI.AddCheckbox("Chat RageLogs");
-    UI.AddLabel("");
-    UI.AddDropdown( "Arrows", [ "Off", "triangle", "arrows" ] );
-    UI.AddColorPicker( "Arrows color" );
-    UI.AddColorPicker( "Selected arrow color" );
-    UI.AddHotkey( "Left Hotkey" );
-    UI.AddHotkey( "Right Hotkey" );
-    UI.AddHotkey( "Backwards Hotkey" );
-    UI.AddHotkey( "Forward Hotkey" );
-    UI.AddLabel("");
+    UI.AddCheckbox("Safe AWP");
+    UI.AddCheckbox( "Aspect Ratio");
+    UI.AddSliderFloat("Aspect Ratio Value", 0, 5);
+    UI.AddCheckbox("DT Recharger"); 
+    UI.AddCheckbox("Chat RageLogs")
+    UI.AddDropdown("Arrows", [ "Off", "triangle", "arrows" ]);
+    UI.AddColorPicker("Arrows color");
+    UI.AddColorPicker("Selected arrow color");
+    UI.AddHotkey("Left Hotkey");
+    UI.AddHotkey("Right Hotkey");
+    UI.AddHotkey("Backwards Hotkey");
+    UI.AddHotkey("Forward Hotkey");
     UI.AddHotkey("Minimum damage override");
     UI.AddSliderInt("Pistol Mindmg", 0, 130);
     UI.AddSliderInt("Heavy Pistol Mindmg", 0, 130);
     UI.AddSliderInt("Scout Mindmg", 0, 130);
     UI.AddSliderInt("AWP Mindmg", 0, 130);
     UI.AddSliderInt("Auto Mindmg", 0, 130);
+    UI.SetValue("Safe AWP", false);
+    UI.SetValue("Aspect Ratio", false)
+    UI.SetValue("DT Recharger", false)
+    UI.SetValue("ChatRagelogs", false)
 }
 
-Cheat.RegisterCallback("CreateMove", "aspectration")
-Cheat.RegisterCallback("Draw", "main_dt")
+Cheat.RegisterCallback("CreateMove", "togler");
+Cheat.RegisterCallback("FrameStageNotify", "aspectration");
+Cheat.RegisterCallback("Draw", "main_dt");
 Cheat.RegisterCallback("Draw", "keybinds");
 Cheat.RegisterCallback("Draw", "watermark");
 Cheat.RegisterCallback("Draw", "main_aa");
