@@ -1,6 +1,7 @@
-
 enable_mod();
 modmenu();
+
+UI.SetValue("Misc", "GENERAL", "Miscellaneous", "Hidden cvars", true);
 
 var color_h = UI.GetColor("Misc", "JAVASCRIPT", "Script Items", "Hotkey Color");
 var color_f = UI.GetColor("Misc", "JAVASCRIPT", "Script items", "Fake Color");
@@ -27,6 +28,7 @@ var isHideRealActive = false
 var fa = 0;
 var sa = 0;
 var DT_Charge;
+var rage_antiaim = true;
 
 function get_icon(a) {
     var letter = ""
@@ -942,10 +944,10 @@ function dt_recharger() {
 		DT_Charge = Exploit.GetCharge()
 		if (UI.IsHotkeyActive("Rage", "GENERAL", "Exploits", "Doubletap")) {
 			if (DT_Charge == 0) {
-                UI.SetValue("Rage", "GENERAL", "Exploits", "Doubletap", false)
-				Exploit.Exploit.Recharge()
+                UI.SetValue("Rage", "GENERAL", "Exploits", "Doubletap", false);
+				Exploit.Exploit.Recharge();
 			} else {
-                UI.SetValue("Rage", "GENERAL", "Exploits", "Doubletap", true)
+                UI.SetValue("Rage", "GENERAL", "Exploits", "Doubletap", true);
             }
 		}
 	}
@@ -955,7 +957,6 @@ function aspectration() {
     if (UI.GetValue("Misc", "JAVASCRIPT", "Script items", "Aspect Ratio", true) && UI.GetValue("Misc", "JAVASCRIPT", "Script items", "Activate Revoltmod", true)) {
         UI.SetEnabled("Misc", "JAVASCRIPT", "Script items", "Aspect Ratio Value", true);
         ratio = UI.GetValue("Misc", "JAVASCRIPT", "Script items", "Aspect Ratio Value").toString();
-        UI.SetValue("Misc", "GENERAL", "Miscellaneous", "Hidden cvars", true);
         switch (Global.FrameStage()) {
             case 5: {
                 Global.ExecuteCommand( "r_aspectratio " + ratio );
@@ -964,12 +965,48 @@ function aspectration() {
             default: break;
         } 
     } else {
-        UI.SetEnabled("Misc", "JAVASCRIPT", "Script items", "Aspect Ratio Value", false)
+        UI.SetEnabled("Misc", "JAVASCRIPT", "Script items", "Aspect Ratio Value", false);
+    }
+}
+
+function legit_antiaim() {
+    if (UI.GetValue("Misc", "JAVASCRIPT", "Script items", "Legit AA on key", true) && UI.GetValue("Misc", "JAVASCRIPT", "Script items", "Activate Revoltmod", true)) {
+        UI.SetEnabled("Misc", "JAVASCRIPT", "Script items", "Legit AA bind", true);
+        if (UI.isHotkeyActive("Misc", "JAVASCRIPT", "Script items", "Legit AA bind")) {
+            if (rage_antiaim = true) {
+                var pitch_backup = UI.GetValue ("Anti-Aim", "Extra", "Pitch");
+                var yaw_backup = UI.GetValue ("Anti-Aim", "Rage Anti-Aim", "Yaw offset");
+                var jitter_backup = UI.GetValue ("Anti-Aim", "Rage Anti-Aim", "Jitter offset");
+                var hideangle_backup = UI.GetValue ("Anti-Aim", "Fake angles", "Hide real angle");
+                var misc_backup = UI.GetValue("Misc", "PERFORMANCE & INFORMATION", "Information", "Restrictions");
+                var at_backup = UI.GetValue ("Anti-Aim", "Rage Anti-Aim", "At targets");
+                var autodir_backup = UI.GetValue ("Anti-Aim", "Rage Anti-Aim", "Auto direction")
+                rage_antiaim = false;
+            }
+            UI.SetValue ("Misc", "PERFORMANCE & INFORMATION", "Information", "Restrictions", 0);
+            UI.SetValue ("Anti-Aim", "Fake angles", "Hide real angle", true);
+            UI.SetValue ("Anti-Aim", "Rage Anti-Aim", "Yaw offset", 180);
+            UI.SetValue ("Anti-Aim", "Rage Anti-Aim", "Jitter offset", 0);
+            UI.SetValue ("Anti-Aim", "Rage Anti-Aim", "At targets", false);
+            UI.SetValue ("Anti-Aim", "Rage Anti-Aim", "Auto direction", false);
+            UI.SetValue ("Anti-Aim", "Extra", "Pitch", 0);
+        } else {
+            UI.SetValue ("Anti-Aim", "Rage Anti-Aim", "At targets", at_backup);
+            UI.SetValue ("Anti-Aim", "Rage Anti-Aim", "Auto direction", autodir_backup);
+            UI.SetValue ("Misc", "PERFORMANCE & INFORMATION", "Information", "Restrictions", misc_backup);
+            UI.SetValue ("Anti-Aim", "Fake angles", "Hide real angle", hideangle_backup);
+            UI.SetValue ("Anti-Aim", "Rage Anti-Aim", "Yaw offset", yaw_backup);
+            UI.SetValue ("Anti-Aim", "Rage Anti-Aim", "Jitter offset", jitter_backup);
+            UI.SetValue ("Anti-Aim", "Extra", "Pitch", pitch_backup);
+            rage_antiaim = true;
+        }
+    } else {
+        UI.SetEnabled("Misc", "JAVASCRIPT", "Script items", "Legit AA bind", false);
     }
 }
 
 function enable_mod() {
-    UI.AddCheckbox("Activate Revoltmod")
+    UI.AddCheckbox("Activate Revoltmod");
 }
 
 function togler() {
@@ -983,6 +1020,7 @@ function togler() {
         UI.SetEnabled("Misc", "JAVASCRIPT", "Script items", "Keybinds X", true);
         UI.SetEnabled("Misc", "JAVASCRIPT", "Script items", "Keybinds Y", true);
         UI.SetEnabled("Misc", "JAVASCRIPT", "Script items", "Hotkey Color", true);
+        UI.SetEnabled("Misc", "JAVASCRIPT", "Script items", "Legit AA on key", true ); 
         UI.SetEnabled("Misc", "JAVASCRIPT", "Script items", "Safe AWP", true );
         UI.SetEnabled("Misc", "JAVASCRIPT", "Script items", "Aspect Ratio", true );
         UI.SetEnabled("Misc", "JAVASCRIPT", "Script items", "DT Recharger", true); 
@@ -1010,6 +1048,8 @@ function togler() {
         UI.SetEnabled("Misc", "JAVASCRIPT", "Script items", "Keybinds X", false);
         UI.SetEnabled("Misc", "JAVASCRIPT", "Script items", "Keybinds Y", false);
         UI.SetEnabled("Misc", "JAVASCRIPT", "Script items", "Hotkey Color", false);
+        UI.SetEnabled("Misc", "JAVASCRIPT", "Script items", "Legit AA on key", false ); 
+        UI.SetEnabled("Misc", "JAVASCRIPT", "Script items", "Legit AA bind", false ); 
         UI.SetEnabled("Misc", "JAVASCRIPT", "Script items", "Safe AWP", false );
         UI.SetEnabled("Misc", "JAVASCRIPT", "Script items", "Aspect Ratio", false );
         UI.SetEnabled("Misc", "JAVASCRIPT", "Script items", "Aspect Ratio Value", false);
@@ -1041,11 +1081,13 @@ function modmenu() {
     UI.AddSliderInt("Keybinds X", 0, Global.GetScreenSize()[0]);
     UI.AddSliderInt("Keybinds Y", 0, Global.GetScreenSize()[1]);
     UI.AddColorPicker("Hotkey Color");
+    UI.AddCheckbox("Legit AA on key");
+    UI.AddHotkey("Legit AA bind");
     UI.AddCheckbox("Safe AWP");
     UI.AddCheckbox( "Aspect Ratio");
     UI.AddSliderFloat("Aspect Ratio Value", 0, 5);
     UI.AddCheckbox("DT Recharger"); 
-    UI.AddCheckbox("Chat RageLogs")
+    UI.AddCheckbox("Chat RageLogs");
     UI.AddDropdown("Arrows", [ "Off", "triangle", "arrows" ]);
     UI.AddColorPicker("Arrows color");
     UI.AddColorPicker("Selected arrow color");
@@ -1065,6 +1107,7 @@ function modmenu() {
     UI.SetValue("ChatRagelogs", false);
 }
 
+Cheat.RegisterCallback("CreateMove", "legit_antiaim");
 Cheat.RegisterCallback("Draw", "togler");
 Cheat.RegisterCallback("FrameStageNotify", "aspectration");
 Cheat.RegisterCallback("Draw", "main_dt");
@@ -1076,4 +1119,3 @@ Cheat.RegisterCallback("Draw", "drawString");
 Cheat.RegisterCallback("CreateMove", "onCreateMove");
 Cheat.RegisterCallback("player_connect_full", "player_connect");
 Cheat.RegisterCallback("CreateMove", "dt_recharger");
-
