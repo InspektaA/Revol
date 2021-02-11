@@ -5,6 +5,7 @@ This is my first javascript.
 **11.02.2021** 
   - Added Chat Hitlog.
   - Added menu hiding.
+
 **12.02.2021** 
   - Fixed aspectration.
   - Added Legit AA on key
