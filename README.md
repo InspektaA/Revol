@@ -10,6 +10,7 @@ This is my first javascript.
   - Fixed aspectration.
   - Added Legit AA on key
   - Fixed Rage Hitlogs
+  
 **13.02.2021**
   - Fixed Legit AA on Key.
   - Reworked DT Recharger.
