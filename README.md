@@ -1,6 +1,11 @@
 # revoltmod
 Revoltmod for Onetap v3 (Crack).  
 This is my first javascript.
+
+# Read me
+Low Delta only works with Slow walk.  
+(If Slow walk turned off, Low Delta not work too)
+
 # Changelog
 **13.02.2021**
   - Fixed Legit AA on Key.
