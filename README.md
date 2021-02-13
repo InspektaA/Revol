@@ -14,8 +14,8 @@ Low Delta only works with Slow walk.
 
 **11.02.2021** 
   - Fixed aspectration.
-  - Added Legit AA on key
-  - Fixed Rage Hitlogs
+  - Added Legit AA on key.
+  - Fixed Rage Hitlogs.
   
 **10.02.2021** 
   - Added Chat Hitlog.
