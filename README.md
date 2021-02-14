@@ -7,6 +7,10 @@ Low Delta only works with Slow walk.
 (If Slow walk turned off, Low Delta not work too)
 
 # Changelog
+**14.02.2021** 
+  - Removed Antiaim inverter (LEFT, RIGHT, BACK, FORWARD)
+  - Reworked indicators.
+
 **13.02.2021**
   - Fixed Legit AA on Key.
   - Reworked DT Recharger.
