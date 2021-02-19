@@ -7,7 +7,7 @@ Low Delta only works with Slow walk.
 (If Slow walk turned off, Low Delta not work too)
 
 # Changelog
-**19.02.2021** 
+**19.02.2021 Last** 
   - Fixed Jitter Offset (when Low Delta actived)
   - Removed DT Settings
   - Improved Hit Log ( added hit damage info :) )
