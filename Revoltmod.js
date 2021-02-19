@@ -773,7 +773,7 @@ function mod_clantag() {
                     case 12: { Local.SetClanTag(" Revol"); break; }
                     case 13: { Local.SetClanTag(" Revol! "); break; }
                     case 14: { Local.SetClanTag(" Revolt"); break; }
-                    case 15: { Local.SetClanTag(" Revolt|{}| "); break; }
+                    case 15: { Local.SetClanTag(" Revolt# "); break; }
                     case 16: { Local.SetClanTag(" RevoltM"); break; }
                     case 17: { Local.SetClanTag(" RevoltM0"); break; }
                     case 18: { Local.SetClanTag(" RevoltMo"); break; }
