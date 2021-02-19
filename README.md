@@ -7,6 +7,12 @@ Low Delta only works with Slow walk.
 (If Slow walk turned off, Low Delta not work too)
 
 # Changelog
+**19.02.2021** 
+  - Fixed Jitter Offset (when Low Delta actived)
+  - Removed DT Settings
+  - Improved Hit Log ( added hit damage info :) )
+  - Added Mod Clantag ( Support me :) )
+
 **14.02.2021** 
   - Removed Antiaim inverter (LEFT, RIGHT, BACK, FORWARD)
   - Reworked indicators.
