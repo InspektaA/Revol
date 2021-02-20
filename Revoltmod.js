@@ -13,7 +13,9 @@ var auto_cache = UI.GetValue("Rage", "AUTOSNIPER", "Targeting", "Minimum damage"
 var fa = 0;
 var sa = 0;
 var original_aa = true
-var jitter_protect = true
+var jitter_backup = UI.GetValue("Anti-Aim", "Rage Anti-Aim", "Jitter offset");
+var yaw_backup = UI.GetValue("Anti-Aim", "Rage Anti-Aim", "Yaw offset");
+var adir_backup = UI.GetValue("Anti-Aim", "Rage Anti-Aim", "Auto direction");
 var targetName = []
 var lasttime = 0;
 var hs_dt_protect = true
@@ -658,16 +660,10 @@ function dt_recharger()
 
 function low_delta() {
     if (UI.GetValue("Misc", "JAVASCRIPT", "Script items", "Low delta", true)) {
-        slow_walk_status = UI.IsHotkeyActive("Anti-Aim", "Extra", "Slow walk")
-        invert_aa = UI.IsHotkeyActive("Anti-Aim", "Fake angles", "Inverter")
-        if (slow_walk_status == true) {
-            if (invert_aa == true) {
-                if (jitter_protect) {
-                    var jitter_backup = UI.GetValue("Anti-Aim", "Rage Anti-Aim", "Jitter offset");
-                    var yaw_backup = UI.GetValue("Anti-Aim", "Rage Anti-Aim", "Yaw offset");
-                    var adir_backup = UI.GetValue("Anti-Aim", "Rage Anti-Aim", "Auto direction");
-                    jitter_protect = false
-                }
+        actived_sw = UI.IsHotkeyActive("Anti-Aim", "Extra", "Slow walk")
+        actived_inv_aa = UI.IsHotkeyActive("Anti-Aim", "Fake angles", "Inverter")
+        if (actived_sw == true) {
+            if (actived_inv_aa == true) {
                 UI.SetValue("Anti-Aim", "Rage Anti-Aim", "Yaw offset", 10);
                 UI.SetValue("Anti-Aim", "Rage Anti-Aim", "Jitter offset", 0);
                 UI.SetValue("Anti-Aim", "Rage Anti-Aim", "Auto direction", false);
@@ -675,20 +671,17 @@ function low_delta() {
                 AntiAim.SetFakeOffset(0);
                 AntiAim.SetRealOffset(26);
             } else {
-                UI.SetValue("Anti-Aim", "Rage Anti-Aim", "Yaw offset", 10);
+                UI.SetValue("Anti-Aim", "Rage Anti-Aim", "Yaw offset", 0);
                 UI.SetValue("Anti-Aim", "Rage Anti-Aim", "Jitter offset", 0);
                 UI.SetValue("Anti-Aim", "Rage Anti-Aim", "Auto direction", false);
                 AntiAim.SetOverride(1);
                 AntiAim.SetFakeOffset(0);
-                AntiAim.SetRealOffset(-20); 
+                AntiAim.SetRealOffset(-26); 
             }
         } else {
-            if (!jitter_protect) {
-                UI.SetValue("Anti-Aim", "Rage Anti-Aim", "Jitter offset", jitter_backup);
-                UI.SetValue("Anti-Aim", "Rage Anti-Aim", "Yaw offset", yaw_backup);
-                UI.SetValue("Anti-Aim", "Rage Anti-Aim", "Auto direction", adir_backup);
-                jitter_protect = true
-            }
+            UI.SetValue("Anti-Aim", "Rage Anti-Aim", "Jitter offset", jitter_backup);
+            UI.SetValue("Anti-Aim", "Rage Anti-Aim", "Yaw offset", yaw_backup);
+            UI.SetValue("Anti-Aim", "Rage Anti-Aim", "Auto direction", adir_backup);
             AntiAim.SetOverride(0);
         }
     }
@@ -921,4 +914,3 @@ Cheat.RegisterCallback("ragebot_fire", "ragebotLogs");
 Cheat.RegisterCallback("Draw", "rev_indicators");
 Cheat.RegisterCallback("player_connect_full", "player_connect");
 Cheat.RegisterCallback("CreateMove", "dt_recharger");
-
