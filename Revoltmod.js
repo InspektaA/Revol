@@ -564,7 +564,7 @@ function low_delta()
     actived_sw = UI.IsHotkeyActive("Anti-Aim", "Extra", "Slow walk")
     actived_inv_aa = UI.IsHotkeyActive("Anti-Aim", "Fake angles", "Inverter")
 
-    if (UI.IsHotkeyActive("Misc", "JAVASCRIPT", "Script items", "Legit AA Key"))
+    if (actived_sw)
     {
         if (save_lowdelta)
         {
