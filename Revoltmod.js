@@ -12,8 +12,8 @@ Cheat.Print("[+] Little Changed Clantag and Ragelog" + " \n")
 // -- UI buttons --
 UI.AddLabel("            Revoltmod")
 UI.AddLabel("-------------------------------");
-UI.AddSliderInt("Antiaim X");
-UI.AddSliderInt("Antiaim Y");
+UI.AddSliderInt("Antiaim X", 0, screen_size[0]);
+UI.AddSliderInt("Antiaim Y", 0, screen_size[1]);
 UI.AddLabel("-------------------------------");
 UI.AddCheckbox("Low delta");
 UI.AddHotkey("Legit AA Key");
