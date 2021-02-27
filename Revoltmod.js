@@ -1,6 +1,5 @@
 // New revoltmod
 
-Cheat.ExecuteCommand("clear");
 Cheat.Print("------------------- Revoltmod v2 -------------------" + " \n");
 Cheat.Print("------------ Changelog 27.02.2021 18:45 ------------" + " \n");
 Cheat.Print("[+] Reworked mod" + " \n");
