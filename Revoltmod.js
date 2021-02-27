@@ -1,13 +1,13 @@
 // New revoltmod
 
-Cheat.Print("------------------- Revoltmod v2 -------------------" + " \n")
-Cheat.Print("------------ Changelog 27.02.2021 18:45 ------------" + " \n")
-Cheat.Print("[+] Reworked mod" + " \n")
-Cheat.Print("[+] I remove hotkey list and now it shown in indicator" + " \n")
-Cheat.Print("[+] Reworked watermark (now shown gamerules and alpha-channel support) " + " \n")
-Cheat.Print("[+] New Damage Override and Low Delta" + " \n")
-Cheat.Print("[+] Little Changed Clantag and Ragelog" + " \n")
-
+Cheat.ExecuteCommand("clear");
+Cheat.Print("------------------- Revoltmod v2 -------------------" + " \n");
+Cheat.Print("------------ Changelog 27.02.2021 18:45 ------------" + " \n");
+Cheat.Print("[+] Reworked mod" + " \n");
+Cheat.Print("[+] I remove hotkey list and now it shown in indicator" + " \n");
+Cheat.Print("[+] Reworked watermark (now shown gamerules and alpha-channel support) " + " \n");
+Cheat.Print("[+] New Damage Override and Low Delta" + " \n");
+Cheat.Print("[+] Little Changed Clantag and Ragelog" + " \n");
 
 // -- UI buttons --
 UI.AddLabel("            Revoltmod")
