@@ -571,7 +571,7 @@ function low_delta()
             jitter_backup = UI.GetValue("Anti-Aim", "Rage Anti-Aim", "Jitter offset");
             yaw_backup = UI.GetValue("Anti-Aim", "Rage Anti-Aim", "Yaw offset");
             adir_backup = UI.GetValue("Anti-Aim", "Rage Anti-Aim", "Auto direction");
-            original_aa = false;
+            save_lowdelta = false;
         }
         if (actived_inv_aa == true) 
         {
@@ -598,7 +598,7 @@ function low_delta()
             UI.SetValue("Anti-Aim", "Rage Anti-Aim", "Jitter offset", jitter_backup);
             UI.SetValue("Anti-Aim", "Rage Anti-Aim", "Yaw offset", yaw_backup);
             UI.SetValue("Anti-Aim", "Rage Anti-Aim", "Auto direction", adir_backup);
-            original_aa = true;
+            save_lowdelta = true;
         }
         AntiAim.SetOverride(0);
     }
