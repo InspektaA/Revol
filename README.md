@@ -1,4 +1,4 @@
-# revoltmod
+# Revoltmod
 Revoltmod for Onetap v3 (Crack).  
 This is my first javascript.
 
