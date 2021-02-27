@@ -7,6 +7,13 @@ Low Delta only works with Slow walk.
 (If Slow walk turned off, Low Delta not work too)
 
 # Changelog
+**27.02.2021 Version 2** 
+  - Reworked mod
+  - I remove hotkey list and now it shown in indicator
+  - Reworked watermark (now shown gamerules and alpha-color support)
+  - New Damage Override and Low Delta
+  - Little Changed Clantag and Ragelog
+
 **19.02.2021 Last** 
   - Fixed Jitter Offset (when Low Delta actived)
   - Removed DT Settings
