@@ -8,7 +8,7 @@ Low Delta only works with Slow walk.
 
 # Changelog
 **06.03.2021**  
-  - Nowdays i stopping filling changelog in github and filling in script!
+  - Nowdays i stopping filling changelog in github and only filling in script!
   - Fixed Lowdelta
 
 **27.02.2021 Version 2** 
