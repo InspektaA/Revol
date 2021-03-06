@@ -7,6 +7,9 @@ Cheat.Print("[+] I remove hotkey list and now it shown in indicator" + " \n");
 Cheat.Print("[+] Reworked watermark (now shown gamerules and alpha-channel support) " + " \n");
 Cheat.Print("[+] New Damage Override and Low Delta" + " \n");
 Cheat.Print("[+] Little Changed Clantag and Ragelog" + " \n");
+Cheat.Print("------------ Changelog 27.02.2021 18:45 ------------" + " \n");
+Cheat.Print("[+] Fixed Lowdelta" + " \n");
+
 
 // -- UI buttons --
 UI.AddLabel("            Revoltmod")
@@ -561,45 +564,52 @@ function revolt_indicators()
 
 function low_delta()
 {
-    actived_sw = UI.IsHotkeyActive("Anti-Aim", "Extra", "Slow walk")
-    actived_inv_aa = UI.IsHotkeyActive("Anti-Aim", "Fake angles", "Inverter")
-
-    if (actived_sw)
+    if (UI.GetValue("Misc", "JAVASCRIPT", "Script items", "Low delta", true)) 
     {
-        if (save_lowdelta)
+        actived_sw = UI.IsHotkeyActive("Anti-Aim", "Extra", "Slow walk");
+        actived_inv_aa = UI.IsHotkeyActive("Anti-Aim", "Fake angles", "Inverter");
+    
+        if (actived_sw)
         {
-            jitter_backup = UI.GetValue("Anti-Aim", "Rage Anti-Aim", "Jitter offset");
-            yaw_backup = UI.GetValue("Anti-Aim", "Rage Anti-Aim", "Yaw offset");
-            adir_backup = UI.GetValue("Anti-Aim", "Rage Anti-Aim", "Auto direction");
-            save_lowdelta = false;
+            if (save_lowdelta)
+            {
+                jitter_backup = UI.GetValue("Anti-Aim", "Rage Anti-Aim", "Jitter offset");
+                yaw_backup = UI.GetValue("Anti-Aim", "Rage Anti-Aim", "Yaw offset");
+                adir_backup = UI.GetValue("Anti-Aim", "Rage Anti-Aim", "Auto direction");
+                save_lowdelta = false;
+            }
+            if (actived_inv_aa == true) 
+            {
+                UI.SetValue("Anti-Aim", "Rage Anti-Aim", "Yaw offset", 10);
+                UI.SetValue("Anti-Aim", "Rage Anti-Aim", "Jitter offset", 0);
+                UI.SetValue("Anti-Aim", "Rage Anti-Aim", "Auto direction", false);
+                AntiAim.SetOverride(1);
+                AntiAim.SetFakeOffset(0);
+                AntiAim.SetRealOffset(26);
+            } else 
+            {
+                UI.SetValue("Anti-Aim", "Rage Anti-Aim", "Yaw offset", -10);
+                UI.SetValue("Anti-Aim", "Rage Anti-Aim", "Jitter offset", 0);
+                UI.SetValue("Anti-Aim", "Rage Anti-Aim", "Auto direction", false);
+                AntiAim.SetOverride(1);
+                AntiAim.SetFakeOffset(0);
+                AntiAim.SetRealOffset(-26); 
+            }
         }
-        if (actived_inv_aa == true) 
+        else
         {
-            UI.SetValue("Anti-Aim", "Rage Anti-Aim", "Yaw offset", 10);
-            UI.SetValue("Anti-Aim", "Rage Anti-Aim", "Jitter offset", 0);
-            UI.SetValue("Anti-Aim", "Rage Anti-Aim", "Auto direction", false);
-            AntiAim.SetOverride(1);
-            AntiAim.SetFakeOffset(0);
-            AntiAim.SetRealOffset(26);
-        } else 
-        {
-            UI.SetValue("Anti-Aim", "Rage Anti-Aim", "Yaw offset", -10);
-            UI.SetValue("Anti-Aim", "Rage Anti-Aim", "Jitter offset", 0);
-            UI.SetValue("Anti-Aim", "Rage Anti-Aim", "Auto direction", false);
-            AntiAim.SetOverride(1);
-            AntiAim.SetFakeOffset(0);
-            AntiAim.SetRealOffset(-26); 
+            if (!save_lowdelta)
+            {
+                UI.SetValue("Anti-Aim", "Rage Anti-Aim", "Jitter offset", jitter_backup);
+                UI.SetValue("Anti-Aim", "Rage Anti-Aim", "Yaw offset", yaw_backup);
+                UI.SetValue("Anti-Aim", "Rage Anti-Aim", "Auto direction", adir_backup);
+                save_lowdelta = true;
+            }
+            AntiAim.SetOverride(0);
         }
-    }
-    else
+    } 
+    else 
     {
-        if (!save_lowdelta)
-        {
-            UI.SetValue("Anti-Aim", "Rage Anti-Aim", "Jitter offset", jitter_backup);
-            UI.SetValue("Anti-Aim", "Rage Anti-Aim", "Yaw offset", yaw_backup);
-            UI.SetValue("Anti-Aim", "Rage Anti-Aim", "Auto direction", adir_backup);
-            save_lowdelta = true;
-        }
         AntiAim.SetOverride(0);
     }
 }
@@ -661,7 +671,6 @@ function watermark()
 function unloading() 
 {
     UI.SetValue("Misc", "PERFORMANCE & INFORMATION", "Information", "Watermark" , true);
-    UI.SetValue("Misc", "GENERAL", "Miscellaneous", "Hidden cvars", false);
     UI.GetValue("Misc", "JAVASCRIPT", "Script items", "Aspect Ratio", false);
 }
 
@@ -677,3 +686,4 @@ Cheat.RegisterCallback("Draw", "watermark");
 Cheat.RegisterCallback("Unload", "unloading");
 Global.RegisterCallback("CreateMove", "weapons_dmg_override");
 Cheat.RegisterCallback("Draw", "revolt_indicators");
+
