@@ -7,6 +7,10 @@ Low Delta only works with Slow walk.
 (If Slow walk turned off, Low Delta not work too)
 
 # Changelog
+**06.03.2021**  
+  - Nowdays i stopping filling changelog in github and filling in script!
+  - Fixed Lowdelta
+
 **27.02.2021 Version 2** 
   - Reworked mod
   - I remove hotkey list and now it shown in indicator
