@@ -588,7 +588,7 @@ function revolt_indicators()
 
 function low_delta()
 {
-    if (UI.GetValue("Misc", "JAVASCRIPT", "Script items", "Low delta")) 
+    if (UI.GetValue("Misc", "JAVASCRIPT", "Script items", "Low delta", true)) 
     {
         actived_sw = UI.IsHotkeyActive("Anti-Aim", "Extra", "Slow walk")
         actived_inv_aa = UI.IsHotkeyActive("Anti-Aim", "Fake angles", "Inverter")
