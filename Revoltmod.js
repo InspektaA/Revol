@@ -7,11 +7,22 @@ Cheat.Print("[+] I remove hotkey list and now it shown in indicator" + " \n");
 Cheat.Print("[+] Reworked watermark (now shown gamerules and alpha-channel support) " + " \n");
 Cheat.Print("[+] New Damage Override and Low Delta" + " \n");
 Cheat.Print("[+] Little Changed Clantag and Ragelog" + " \n");
-Cheat.Print("------------ Changelog 06.03.2021 20:10 ------------" + " \n");
-Cheat.Print("[+] Fixed Lowdelta" + " \n");
-Cheat.Print("------------ Changelog 07.03.2021 19:26 ------------" + " \n");
-Cheat.Print("[+] Add AntiBruteforce (from https://pastebin.com/uhv1Bstq)" + " \n");
+Cheat.Print("------------ Changelog 01.03.2021 22:56 ------------" + " \n");
+Cheat.Print("[+] Added Ping Spike " + " \n");
 
+// -- VAR's --
+var screen_size = Render.GetScreenSize();
+var screen_half_x = screen_size[0] / 2;
+var screen_half_y = screen_size[1] / 2;
+var save_damage_pistol = true;
+var save_damage_heavy = true;
+var save_damage_scout = true;
+var save_damage_awp = true;
+var save_damage_auto = true;
+var save_lowdelta = true
+var original_aa = true;
+var ping_spike_control = true
+var lasttime = 0;
 
 // -- UI buttons --
 UI.AddLabel("            Revoltmod")
@@ -19,10 +30,10 @@ UI.AddLabel("-------------------------------");
 UI.AddSliderInt("Antiaim X", 0, screen_size[0]);
 UI.AddSliderInt("Antiaim Y", 0, screen_size[1]);
 UI.AddLabel("-------------------------------");
-UI.AddDropdown("Anti Bruteforce", ["Off", "On Hit", "On Shot"]);
 UI.AddCheckbox("Low delta");
 UI.AddHotkey("Legit AA Key");
 UI.AddCheckbox("Clantag");
+UI.AddHotkey("Ping Spike on Key");
 UI.AddLabel("-------------------------------");
 UI.AddCheckbox( "Aspect Ratio");
 UI.AddSliderFloat("Aspect Ratio Value", 0, 5);
@@ -38,22 +49,32 @@ UI.AddColorPicker("Watermark Color");
 UI.AddColorPicker("Fake Color");
 UI.AddLabel("-------------------------------");
 
-
-// -- VAR's --
-var screen_size = Render.GetScreenSize();
-var screen_half_x = screen_size[0] / 2;
-var screen_half_y = screen_size[1] / 2;
-var save_damage_pistol = true;
-var save_damage_heavy = true;
-var save_damage_scout = true;
-var save_damage_awp = true;
-var save_damage_auto = true;
-var original_aa = true;
-var lasttime = 0;
-
 // -- Functions --
 
 UI.SetValue("Misc", "GENERAL", "Miscellaneous", "Hidden cvars", true)
+
+// -- Ping Spike --
+
+function rev_pingspike() 
+{
+    if (UI.IsHotkeyActive("Misc", "JAVASCRIPT", "Script items", "Ping Spike on Key")) 
+    {
+        if (ping_spike_control) 
+        {
+            ps_cache = UI.GetValue("Misc", "GENERAL", "Miscellaneous", "Extended backtracking");
+            ping_spike_control = false
+        }
+        UI.SetValue("Misc", "GENERAL", "Miscellaneous", "Extended backtracking", true);
+    } 
+    else 
+    {
+        if(!ping_spike_control) 
+        {
+            UI.SetValue("Misc", "GENERAL", "Miscellaneous", "Extended backtracking", ps_cache);
+            ping_spike_control = true
+        }
+    }
+}
 
 // -- Fake Indicator --
 
@@ -567,10 +588,10 @@ function revolt_indicators()
 
 function low_delta()
 {
-    if (UI.GetValue("Misc", "JAVASCRIPT", "Script items", "Low delta", true)) 
+    if (UI.GetValue("Misc", "JAVASCRIPT", "Script items", "Low delta")) 
     {
-        actived_sw = UI.IsHotkeyActive("Anti-Aim", "Extra", "Slow walk");
-        actived_inv_aa = UI.IsHotkeyActive("Anti-Aim", "Fake angles", "Inverter");
+        actived_sw = UI.IsHotkeyActive("Anti-Aim", "Extra", "Slow walk")
+        actived_inv_aa = UI.IsHotkeyActive("Anti-Aim", "Fake angles", "Inverter")
     
         if (actived_sw)
         {
@@ -617,209 +638,6 @@ function low_delta()
     }
 }
 
-// -- AntiBruteforce (copyrighted) --
-
-function GetScriptOption(name)
-{
-    var Value = UI.GetValue("Misc", "JAVASCRIPT", "Script Items", name);
-    return Value;
-}
- 
-function radian(degree)
-{
-    return degree * Math.PI / 180.0;
-}
- 
-function ExtendVector(vector, angle, extension)
-{
-    var radianAngle = radian(angle);
-    return [extension * Math.cos(radianAngle) + vector[0], extension * Math.sin(radianAngle) + vector[1], vector[2]];
-}
- 
-function VectorAdd(a, b)
-{
-    return [a[0] + b[0], a[1] + b[1], a[2] + b[2]];
-}
- 
-function VectorSubtract(a, b)
-{
-    return [a[0] - b[0], a[1] - b[1], a[2] - b[2]];
-}
- 
-function VectorMultiply(a, b)
-{
-    return [a[0] * b[0], a[1] * b[1], a[2] * b[2]];
-}
- 
-function VectorLength(x, y, z)
-{
-    return Math.sqrt(x * x + y * y + z * z);
-}
- 
-function VectorNormalize(vec)
-{
-    var length = VectorLength(vec[0], vec[1], vec[2]);
-    return [vec[0] / length, vec[1] / length, vec[2] / length];
-}
- 
-function VectorDot(a, b)
-{
-    return a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
-}
- 
-function VectorDistance(a, b)
-{
-    return VectorLength(a[0] - b[0], a[1] - b[1], a[2] - b[2]);
-}
- 
-function ClosestPointOnRay(target, rayStart, rayEnd)
-{
-    var to = VectorSubtract(target, rayStart);
-    var dir = VectorSubtract(rayEnd, rayStart);
-    var length = VectorLength(dir[0], dir[1], dir[2]);
-    dir = VectorNormalize(dir);
- 
-    var rangeAlong = VectorDot(dir, to);
-    if (rangeAlong < 0.0)
-    {
-        return rayStart;
-    }
-    if (rangeAlong > length)
-    {
-        return rayEnd;
-    }
-    return VectorAdd(rayStart, VectorMultiply(dir, [rangeAlong, rangeAlong, rangeAlong]));
-}
- 
-function Flip()
-{
-    UI.ToggleHotkey("Anti-Aim", "Fake angles", "Inverter");
-}
- 
-var lastHitTime = 0.0;
-var lastImpactTimes =
-[
-    0.0
-];
-var lastImpacts =
-[
-    [0.0, 0.0, 0.0]
-];
- 
-function OnHurt()
-{
-    if (GetScriptOption("Anti Bruteforce") == 0) return;
-    if (Entity.GetEntityFromUserID(Event.GetInt("userid")) !== Entity.GetLocalPlayer()) return;
-    var hitbox = Event.GetInt('hitgroup');
- 
-    if (hitbox == 1 || hitbox == 6 || hitbox == 7) 
-    {
-        var curtime = Global.Curtime();
-        if (Math.abs(lastHitTime - curtime) > 0.5)  
-        {
-            lastHitTime = curtime;
-            Flip();
-        }
-    }
-}
- 
-function OnBulletImpact()
-{
-    if (GetScriptOption("Anti Bruteforce") !== 2) return;
- 
-    var curtime = Global.Curtime();
-    if (Math.abs(lastHitTime - curtime) < 0.5) return;
- 
-    var entity = Entity.GetEntityFromUserID(Event.GetInt("userid"));
-    var impact = [Event.GetFloat("x"), Event.GetFloat("y"), Event.GetFloat("z"), curtime];
-    var source;
-    if (Entity.IsValid(entity) && Entity.IsEnemy(entity))
-    {
-        if (!Entity.IsDormant(entity))
-        {
-            source = Entity.GetEyePosition(entity);
-        }
-        else if (Math.abs(lastImpactTimes[entity] - curtime) < 0.1)
-        {
-            source = lastImpacts[entity];
-        }
-        else
-        {
-            lastImpacts[entity] = impact;
-            lastImpactTimes[entity] = curtime;
-            return;
-        }
-        var local = Entity.GetLocalPlayer();
-        var localEye = Entity.GetEyePosition(local);
-        var localOrigin = Entity.GetProp(local, "CBaseEntity", "m_vecOrigin");
-        var localBody = VectorMultiply(VectorAdd(localEye, localOrigin), [0.5, 0.5, 0.5]);
- 
-        var bodyVec = ClosestPointOnRay(localBody, source, impact);
-        var bodyDist = VectorDistance(localBody, bodyVec);
-       
-        if (bodyDist < 128.0)      
-        {
-            var realAngle = Local.GetRealYaw();
-            var fakeAngle = Local.GetFakeYaw();
- 
-            var headVec = ClosestPointOnRay(localEye, source, impact);
-            var headDist = VectorDistance(localEye, headVec);
-            var feetVec = ClosestPointOnRay(localOrigin, source, impact);
-            var feetDist = VectorDistance(localOrigin, feetVec);
- 
-            var closestRayPoint;
-            var realPos;
-            var fakePos;
- 
-            if (bodyDist < headDist && bodyDist < feetDist)     
-            {                                                      
-                closestRayPoint = bodyVec;
-                realPos = ExtendVector(bodyVec, realAngle + 180.0, 10.0);
-                fakePos = ExtendVector(bodyVec, fakeAngle + 180.0, 10.0);
-            }
-            else if (feetDist < headDist)                      
-            {                                                   
-                closestRayPoint = feetVec;
-                var realPos1 = ExtendVector(bodyVec, realAngle - 30.0 + 90.0, 10.0);
-                var realPos2 = ExtendVector(bodyVec, realAngle - 30.0 - 90.0, 10.0);
-                var fakePos1 = ExtendVector(bodyVec, fakeAngle - 30.0 + 90.0, 10.0);
-                var fakePos2 = ExtendVector(bodyVec, fakeAngle - 30.0 - 90.0, 10.0);
-                if (VectorDistance(feetVec, realPos1) < VectorDistance(feetVec, realPos2))
-                {
-                    realPos = realPos1;
-                }
-                else
-                {
-                    realPos = realPos2;
-                }
-                if (VectorDistance(feetVec, fakePos1) < VectorDistance(feetVec, fakePos2))
-                {
-                    fakePos = fakePos1;
-                }
-                else
-                {
-                    fakePos = fakePos2;
-                }
-            }
-            else                                              
-            {
-                closestRayPoint = headVec;
-                realPos = ExtendVector(bodyVec, realAngle, 10.0);
-                fakePos = ExtendVector(bodyVec, fakeAngle, 10.0);
-            }
- 
-            if (VectorDistance(closestRayPoint, fakePos) < VectorDistance(closestRayPoint, realPos))      
-            {
-                lastHitTime = curtime;
-                Flip();
-            }
-        }
- 
-        lastImpacts[entity] = impact;
-        lastImpactTimes[entity] = curtime;
-    }
-}
-
 // -- Watermark --
 
 function watermark() 
@@ -854,15 +672,15 @@ function watermark()
     var server_info = World.GetServerString().toString();
     if (is_valve_server == true) 
     {
-        server_info = "Valve Server | "
+        server_info = "Valve Server"
     } 
     else if (server_info == "local server")
     {
-        server_info = "Local Server | "
+        server_info = "Local Server"
     } 
 
 	var font = Render.AddFont("Verdana", 7, 400);
-	var text = "Onetap [Revoltmod] | " + server_info + username + " | delay: " + ping + "ms | " + tickrate + "tick | " + hours + minutes + seconds;
+	var text = "Onetap [Revoltmod] | " + server_info + " | " + username + " | delay: " + ping + "ms | " + tickrate + "tick | " + hours + minutes + seconds;
 	
 	var w = Render.TextSizeCustom(text, font)[0] + 8;
 	var x = Global.GetScreenSize()[0];
@@ -877,13 +695,13 @@ function watermark()
 function unloading() 
 {
     UI.SetValue("Misc", "PERFORMANCE & INFORMATION", "Information", "Watermark" , true);
+    UI.SetValue("Misc", "GENERAL", "Miscellaneous", "Hidden cvars", false);
     UI.GetValue("Misc", "JAVASCRIPT", "Script items", "Aspect Ratio", false);
 }
 
 // -- Callback's --
- 
-Cheat.RegisterCallback("player_hurt", "OnHurt");
-Cheat.RegisterCallback("bullet_impact", "OnBulletImpact");
+
+Cheat.RegisterCallback("FrameStageNotify", "rev_pingspike");
 Cheat.RegisterCallback("Draw", "main_aa")
 Cheat.RegisterCallback("CreateMove", "low_delta");
 Cheat.RegisterCallback("FrameStageNotify", "aspectration");
@@ -895,5 +713,4 @@ Cheat.RegisterCallback("Draw", "watermark");
 Cheat.RegisterCallback("Unload", "unloading");
 Global.RegisterCallback("CreateMove", "weapons_dmg_override");
 Cheat.RegisterCallback("Draw", "revolt_indicators");
-
 
