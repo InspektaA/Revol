@@ -9,6 +9,8 @@ Cheat.Print("[+] New Damage Override and Low Delta" + " \n");
 Cheat.Print("[+] Little Changed Clantag and Ragelog" + " \n");
 Cheat.Print("------------ Changelog 01.03.2021 22:56 ------------" + " \n");
 Cheat.Print("[+] Added Ping Spike " + " \n");
+Cheat.Print("------------ Changelog 23.03.2021 16:38 ------------" + " \n");
+Cheat.Print("[+] Added Customized Watermark " + " \n");
 
 // -- VAR's --
 var screen_size = Render.GetScreenSize();
@@ -45,7 +47,14 @@ UI.AddSliderInt("Scout Override", 0, 130);
 UI.AddSliderInt("AWP Override", 0, 130);
 UI.AddSliderInt("Autosniper Override", 0, 130);
 UI.AddLabel("-------------------------------");
+UI.AddCheckbox("Draw Watermark");
+UI.AddCheckbox("Custom Username");
+UI.AddTextbox("Username");
+UI.AddLabel("");
+UI.AddLabel("-------------------------------");
 UI.AddColorPicker("Watermark Color");
+UI.AddSliderInt("Transparency", 0, 255);
+UI.AddLabel("-------------------------------");
 UI.AddColorPicker("Fake Color");
 UI.AddLabel("-------------------------------");
 
@@ -148,7 +157,7 @@ function mod_clantag() {
     if (UI.GetValue("Misc", "JAVASCRIPT", "Script Items", "Clantag")) 
     {
         UI.SetValue("Misc", "GENERAL", "Miscellaneous", "Clantag", 0)
-        var time = parseInt((Globals.Curtime() * 4))
+        var time = parseInt((Globals.Curtime() * 6))
         if (time != lasttime)
         {
             if(UI.GetValue("Misc", "JAVASCRIPT", "Script Items", "Clantag", true))
@@ -467,49 +476,49 @@ function revolt_indicators()
     {
         if (lby_type == 0) // Normal
         {
-            Render.String(screen_half_x + 27, screen_half_y + 15, 0, "Normal", [177, 151, 255, 200], 3);
+            Render.String(screen_half_x - 11, screen_half_y + 23, 0, "Normal", [177, 151, 255, 200], 3);
         } 
         else if (lby_type == 1) // Opposite
         {
-            Render.String(screen_half_x + 27, screen_half_y + 15, 0, "Opposite", [177, 151, 255, 200], 3);
+            Render.String(screen_half_x - 11, screen_half_y + 23, 0, "Opposite", [177, 151, 255, 200], 3);
         } 
         else if (lby_type == 2) // Sway
         {
-            Render.String(screen_half_x + 27, screen_half_y + 15, 0, "Sway", [177, 151, 255, 200], 3);
+            Render.String(screen_half_x - 11, screen_half_y + 23, 0, "Sway", [177, 151, 255, 200], 3);
         }
     } 
     else if (UI.GetValue("Anti-Aim", "Fake angles", "Enabled", true) && legit_aa_actived)
     {
-        Render.String(screen_half_x + 27, screen_half_y + 15, 0, "Legit AA on Key", [177, 151, 255, 200], 3);
+        Render.String(screen_half_x - 11, screen_half_y + 23, 0, "Legit AA on Key", [177, 151, 255, 200], 3);
     } 
     else 
     {
-        Render.String(screen_half_x + 27, screen_half_y + 15, 0, "Desyncless", [177, 151, 255, 200], 3);
+        Render.String(screen_half_x - 11, screen_half_y + 23, 0, "Desyncless", [177, 151, 255, 200], 3);
     }
 
     // Inverter Indicator
 
     if (UI.IsHotkeyActive("Anti-Aim", "Fake Angles", "Inverter") ) 
     {
-        Render.String(screen_half_x + 27, screen_half_y + 26, 0, "Left desync", [155, 151, 255, 200], 3);
+        Render.String(screen_half_x - 16, screen_half_y + 34, 0, "Left desync", [155, 151, 255, 200], 3);
     } else 
     {
-        Render.String(screen_half_x + 27, screen_half_y + 26, 0, "Right desync", [155, 151, 255, 200], 3);
+        Render.String(screen_half_x - 16, screen_half_y + 34, 0, "Right desync", [155, 151, 255, 200], 3);
     }
 
     // Doubletap Indicator
 
     if (dt_actived && (dt_charge < 1)) 
     {
-        Render.String(screen_half_x + 27, screen_half_y + 37, 0, "Doubletap" + " [Reloading " + dt_charge + " ]" , [50, 50, 177, 200], 3);
+        Render.String(screen_half_x - 14, screen_half_y + 45, 0, "Doubletap" + " [Reloading " + dt_charge + " ]" , [50, 50, 177, 200], 3);
     } 
     else if (dt_actived && (dt_charge == 1)) 
     {
-        Render.String(screen_half_x + 27, screen_half_y + 37, 0, "Doubletap" + " [Reloaded]", [15, 177, 15, 200], 3);
+        Render.String(screen_half_x - 14, screen_half_y + 45, 0, "Doubletap" + " [Reloaded]", [15, 177, 15, 200], 3);
     } 
     else if (!dt_actived) 
     {
-        Render.String(screen_half_x + 27, screen_half_y + 37, 0, "Doubletap" + " [Disabled]", [155, 15, 15, 200], 3);
+        Render.String(screen_half_x - 14, screen_half_y + 45, 0, "Doubletap" + " [Disabled]", [155, 15, 15, 200], 3);
     }
 
     // Force baim & safe points
@@ -517,13 +526,13 @@ function revolt_indicators()
     if (force_baim_actived) 
     {
         y_plus = y_plus + 11;
-        Render.String(screen_half_x + 27, screen_half_y + 37 + y_plus, 0, "Force BAIM" , [50, 190, 50, 200], 3);
+        Render.String(screen_half_x - 13, screen_half_y + 45 + y_plus, 0, "Force BAIM" , [50, 190, 50, 200], 3);
     }
 
     if (force_safe_actived) 
     {
         y_plus = y_plus + 11;
-        Render.String(screen_half_x + 27, screen_half_y + 37 + y_plus, 0, "Force SAFE" , [50, 190, 50, 200], 3);
+        Render.String(screen_half_x - 10, screen_half_y + 45 + y_plus, 0, "Force SAFE" , [50, 190, 50, 200], 3);
     }
 
     // Slow Walk Indicator
@@ -531,7 +540,7 @@ function revolt_indicators()
     if (slow_actived) 
     {
         y_plus = y_plus + 11;
-        Render.String(screen_half_x + 27, screen_half_y + 37 + y_plus, 0, "Slow Walk" , [15, 170, 190, 170], 3);
+        Render.String(screen_half_x - 14, screen_half_y + 45 + y_plus, 0, "Slow Walk" , [15, 170, 190, 170], 3);
     }
 
     // Fake Duck Indicator
@@ -539,7 +548,7 @@ function revolt_indicators()
     if (fakeduck_actived) 
     {
         y_plus = y_plus + 11;
-        Render.String(screen_half_x + 27, screen_half_y + 37 + y_plus, 0, "Fake Duck" , [15, 120, 190, 170], 3);
+        Render.String(screen_half_x - 12, screen_half_y + 45 + y_plus, 0, "Fake Duck" , [15, 120, 190, 170], 3);
     }
 
     // Damage Override Indicator
@@ -572,7 +581,7 @@ function revolt_indicators()
     if (dmg_override_actived) 
     {
         y_plus = y_plus + 11;
-        Render.String(screen_half_x + 27, screen_half_y + 37 + y_plus, 0, "Damage Override: " + dmg_info , [255, 190, 15, 200], 3);
+        Render.String(screen_half_x - 18, screen_half_y + 45 + y_plus, 0, "Damage Override: " + dmg_info , [255, 190, 15, 200], 3);
     }
 
     // Onshot Indicator
@@ -580,7 +589,7 @@ function revolt_indicators()
     if (onshot_actived) 
     {
         y_plus = y_plus + 11;
-        Render.String(screen_half_x + 27, screen_half_y + 37 + y_plus, 0, "Onshot", [200, 255, 15, 200], 3);
+        Render.String(screen_half_x - 14, screen_half_y + 45 + y_plus, 0, "Onshot", [200, 255, 15, 200], 3);
     }
 }
 
@@ -609,7 +618,7 @@ function low_delta()
                 UI.SetValue("Anti-Aim", "Rage Anti-Aim", "Auto direction", false);
                 AntiAim.SetOverride(1);
                 AntiAim.SetFakeOffset(0);
-                AntiAim.SetRealOffset(26);
+                AntiAim.SetRealOffset(28);
             } else 
             {
                 UI.SetValue("Anti-Aim", "Rage Anti-Aim", "Yaw offset", -10);
@@ -617,10 +626,9 @@ function low_delta()
                 UI.SetValue("Anti-Aim", "Rage Anti-Aim", "Auto direction", false);
                 AntiAim.SetOverride(1);
                 AntiAim.SetFakeOffset(0);
-                AntiAim.SetRealOffset(-26); 
+                AntiAim.SetRealOffset(-28); 
             }
-        }
-        else
+        } else
         {
             if (!save_lowdelta)
             {
@@ -631,8 +639,7 @@ function low_delta()
             }
             AntiAim.SetOverride(0);
         }
-    } 
-    else 
+    } else 
     {
         AntiAim.SetOverride(0);
     }
@@ -642,54 +649,75 @@ function low_delta()
 
 function watermark() 
 {
-    UI.SetValue("Misc", "PERFORMANCE & INFORMATION", "Information", "Watermark" , false);
+    water_status = UI.GetValue("Misc", "JAVASCRIPT", "Script Items", "Draw Watermark")
+    water_name_status = UI.GetValue("Misc", "JAVASCRIPT", "Script Items", "Custom Username")
 
-    if(!World.GetServerString()) 
+    if (water_status == true) 
     {
-        return;
+        UI.SetEnabled("Misc", "JAVASCRIPT", "Script Items", "Custom Username", true);
+        UI.SetEnabled("Misc", "JAVASCRIPT", "Script Items", "Watermark Color", true);
+        UI.SetEnabled("Misc", "JAVASCRIPT", "Script Items", "Transparency", true);
+        UI.SetValue("Misc", "PERFORMANCE & INFORMATION", "Information", "Watermark" , false);
+
+        if(!World.GetServerString()) 
+        {
+            return;
+        }
+
+        var color_wm = UI.GetColor("Misc", "JAVASCRIPT", "Script items", "Watermark Color");
+
+        var tickrate = Globals.Tickrate().toString();
+
+        var ping = Math.round(Entity.GetProp(Entity.GetLocalPlayer(), "CPlayerResource", "m_iPing")).toString();
+        
+        if (water_name_status == true) 
+        {
+            UI.SetEnabled("Misc", "JAVASCRIPT", "Script Items", "Username", true);
+            username = UI.GetString("Misc", "JAVASCRIPT", "Script Items", "Username");
+        } else 
+        {
+            UI.SetEnabled("Misc", "JAVASCRIPT", "Script Items", "Username", false);
+            username = "lovr3x & revcy"
+        }
+
+        var today = new Date();
+        var hours1 = today.getHours();
+        var minutes1 = today.getMinutes();
+        var seconds1 = today.getSeconds();
+        var hours = hours1 <= 9 ? "0"+ hours1 + " : " : hours1 + " : ";
+        var minutes = minutes1 <= 9 ? "0" + minutes1 + " : " : minutes1 + " : ";
+        var seconds = seconds1 <= 9 ? "0" + seconds1 : seconds1;
+
+        color_wm = UI.GetColor("Misc", "JAVASCRIPT", "Script items", "Watermark Color");
+
+        gamerules = Entity.GetGameRulesProxy();
+        is_valve_server = Entity.GetProp( gamerules, "CCSGameRulesProxy", "m_bIsValveDS" );
+        var server_info = World.GetServerString().toString();
+        if (is_valve_server == true) 
+        {
+            server_info = "Valve Server"
+        } else if (server_info == "local server")
+        {
+            server_info = "Local Server"
+        } 
+
+        var font = Render.AddFont("Verdana", 7, 400);
+        var text = "Onetap.com | " + server_info + " | " + username + " | delay: " + ping + "ms | " + tickrate + "tick | " + hours + minutes + seconds;
+        
+        var w = Render.TextSizeCustom(text, font)[0] + 8;
+        var x = Global.GetScreenSize()[0];
+
+        x = x - w - 15;
+
+        Render.FilledRect(x, 10, w, 2, [ color_wm[0], color_wm[1], color_wm[2], color_wm[3] ]);
+        Render.FilledRect(x, 12, w, 18, [ 17, 17, 17, transp_water ]);
+        Render.StringCustom(x+4, 10 + 4, 0, text, [ 255, 255, 255, 255 ], font);
+    } else 
+    {
+        UI.SetEnabled("Misc", "JAVASCRIPT", "Script Items", "Watermark Color", false);
+        UI.SetEnabled("Misc", "JAVASCRIPT", "Script Items", "Transparency", false);
+        UI.SetEnabled("Misc", "JAVASCRIPT", "Script Items", "Username", false);
     }
-
-    var color_wm = UI.GetColor("Misc", "JAVASCRIPT", "Script items", "Watermark Color");
-
-    var tickrate = Globals.Tickrate().toString();
-
-    var ping = Math.round(Entity.GetProp(Entity.GetLocalPlayer(), "CPlayerResource", "m_iPing")).toString();
-
-    var username = Cheat.GetUsername().toString();
-
-    var today = new Date();
-    var hours1 = today.getHours();
-    var minutes1 = today.getMinutes();
-	var seconds1 = today.getSeconds();
-    var hours = hours1 <= 9 ? "0"+ hours1 + " : " : hours1 + " : ";
-    var minutes = minutes1 <= 9 ? "0" + minutes1 + " : " : minutes1 + " : ";
-	var seconds = seconds1 <= 9 ? "0" + seconds1 : seconds1;
-
-    color_wm = UI.GetColor("Misc", "JAVASCRIPT", "Script items", "Watermark Color");
-
-    gamerules = Entity.GetGameRulesProxy();
-    is_valve_server = Entity.GetProp( gamerules, "CCSGameRulesProxy", "m_bIsValveDS" );
-    var server_info = World.GetServerString().toString();
-    if (is_valve_server == true) 
-    {
-        server_info = "Valve Server"
-    } 
-    else if (server_info == "local server")
-    {
-        server_info = "Local Server"
-    } 
-
-	var font = Render.AddFont("Verdana", 7, 400);
-	var text = "Onetap [Revoltmod] | " + server_info + " | " + username + " | delay: " + ping + "ms | " + tickrate + "tick | " + hours + minutes + seconds;
-	
-	var w = Render.TextSizeCustom(text, font)[0] + 8;
-	var x = Global.GetScreenSize()[0];
-
-	x = x - w - 15;
-
-	Render.FilledRect(x, 10, w, 2, [ color_wm[0], color_wm[1], color_wm[2], 255 ]);
-	Render.FilledRect(x, 12, w, 18, [ 17, 17, 17, color_wm[3] ]);
-	Render.StringCustom(x+4, 10 + 4, 0, text, [ 255, 255, 255, 255 ], font);
 }
 
 function unloading() 
@@ -713,4 +741,3 @@ Cheat.RegisterCallback("Draw", "watermark");
 Cheat.RegisterCallback("Unload", "unloading");
 Global.RegisterCallback("CreateMove", "weapons_dmg_override");
 Cheat.RegisterCallback("Draw", "revolt_indicators");
-
